@@ -1,0 +1,15 @@
+body{
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    max-width: 600px;
+    width: 40vw;
+    margin: auto;
+}
+
+#resultado {
+    width: 100%;
+    height: 30px;
+}
