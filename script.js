@@ -13,6 +13,7 @@ function getData(){
     resultado.value = calculoData( new Date(entrada))
     criarCalendario(eventos)
     
+    
 }
 
 function calculoData(dataEntrada){
@@ -85,5 +86,6 @@ let options = {
 function criarCalendario(eventos){
     let calendar = new Calendar(container, options)
     calendar.createEvents(eventos)
+    calendar.render()
 }
 //-------fim do calendario

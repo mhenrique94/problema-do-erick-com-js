@@ -9,4 +9,6 @@ Resolucao_calendario: contém a implementação do calendário aberto com evento
     Possíveis soluções futuras:
     - Implementação de promises e/ou callbacks.
 
+Implementacao_re-render: implementado método render() proprietário da biblioteca, resolvendo o problema na rechamada da função e repopulação do calendário.
+
 Demais branchs: evolução do código
