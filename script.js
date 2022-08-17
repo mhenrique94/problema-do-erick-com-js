@@ -1,10 +1,18 @@
 let input_data = document.getElementById('entrada_data').addEventListener("change", getData)
 let resultado = document.getElementById('resultado')
+const Calendar = tui.Calendar
+let eventos = []
+let container = document.getElementById('calendar')
+
 
 function getData(){
-    //debbuger
-    var entrada = this.value
+    eventos = []
+    let entrada = this.value
+
+    // estudar promises e/ou settimeout para aplicar aqui: criar calendario acontecerá apenas depois que tiver o retorno da calculodata
     resultado.value = calculoData( new Date(entrada))
+    criarCalendario(eventos)
+    
 }
 
 function calculoData(dataEntrada){
@@ -14,21 +22,21 @@ function calculoData(dataEntrada){
     let tempoNumDia = 1000 * 60 * 60 * 24
     let dias_trabalho = 1
     let dias_folga = 1
-    var dia = new Object()
+    let dia = new Object()
     let intervalo = 0
     let dia_dinamico = new Date(dataAtual)
-
-    var dataEntradaFormatada = `${dataEntrada.getDate()}/${dataEntrada.getMonth()+1}/${dataEntrada.getFullYear()}`
+    
+    let dataEntradaFormatada = `${dataEntrada.getDate()}/${dataEntrada.getMonth()+1}/${dataEntrada.getFullYear()}`
 
     while (intervalo < difTempo) {
         let diaAtualizado = `${dia_dinamico.getDate()}/${dia_dinamico.getMonth()+1}/${dia_dinamico.getFullYear()}`
-
+        
         if (dias_trabalho < 7){
             dia[diaAtualizado] = 'Trabalha? Sim.'
             dias_trabalho++
         } else {
             if(dias_folga < 3){
-                dia[diaAtualizado] = 'Trabalha? Não. Folga 0/'
+                dia[diaAtualizado] = 'Folga 0/'
                 dias_folga++
             } else {
                 dia[diaAtualizado] = 'Trabalha? Sim.'
@@ -37,7 +45,45 @@ function calculoData(dataEntrada){
             }
         }
         intervalo = intervalo + tempoNumDia
-        dia_dinamico.setDate(dia_dinamico.getDate() + 1)
+        eventos.push(
+            {
+                id: intervalo,
+                calendarId: 'cal1',
+                title: dia[diaAtualizado],
+                start: new Date(dia_dinamico),
+                end: new Date(dia_dinamico)
+            }
+            )
+            dia_dinamico.setDate(dia_dinamico.getDate() + 1)
     }
+    
     return `${dataEntradaFormatada}: ${dia[dataEntradaFormatada]}`
 }
+
+
+//-------inicio do calendario
+
+
+let options = {
+    defaultView: 'month',
+    timezone: {
+        zones: [
+            {
+                timezoneName: 'America/Sao_Paulo',
+                displayLabel: 'São Paulo',
+            },
+        ],
+    },
+    calendars: [
+        {
+            id: 'cal1',
+            name: 'Personal',
+            backgroundColor: '#03bd9e',
+        },
+    ],
+};
+function criarCalendario(eventos){
+    let calendar = new Calendar(container, options)
+    calendar.createEvents(eventos)
+}
+//-------fim do calendario

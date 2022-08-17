@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>O Problema do Erick</title>
 </head>
@@ -13,9 +15,13 @@
         <p>O Erick trabalha em escala 6x2. Entre com a data desejada para saber se o Erick trabalhará no dia escolhido.</p>
 
         <input type="date" name="entrada_data" id="entrada_data">
+
+        <div id="calendar" style="height: 600px;"></div>
+
         <h3>Retorno:</h3>
         <input type="text" name="resultado" id="resultado" disabled placeholder="Selecione uma data acima!">
     </div>
+    <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
