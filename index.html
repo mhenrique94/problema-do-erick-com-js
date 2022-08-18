@@ -15,11 +15,12 @@
         <p>O Erick trabalha em escala 6x2. Entre com a data desejada para saber se o Erick trabalhará no dia escolhido.</p>
 
         <input type="date" name="entrada_data" id="entrada_data">
-
-        <div id="calendar" style="height: 600px;"></div>
-
-        <h3>Retorno:</h3>
-        <input type="text" name="resultado" id="resultado" disabled placeholder="Selecione uma data acima!">
+        <input type="text" name="resultado" id="resultado" disabled placeholder="Selecione uma data!">
+        <button onclick="move(-1)" class="button_control"> < </button>
+        <button onclick="move(1)" class="button_control"> > </button>
+        <div class="wrapper-calendar" id="wrapper-calendar">
+            <div id="calendar" style="height: 600px;"></div>
+        </div>
     </div>
     <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
     <script src="script.js"></script>

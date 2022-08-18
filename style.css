@@ -4,12 +4,43 @@ body{
 }
 
 .wrapper {
-    max-width: 900px;
-    width: 40vw;
+    max-width: 1000px;
+    width: 60vw;
     margin: auto;
 }
 
 #resultado {
-    width: 100%;
+    width: 60%;
     height: 30px;
+}
+
+#entrada_data {
+    height: 30px;
+    background-color: -internal-light-dark(rgba(239, 239, 239, 0.3), rgba(59, 59, 59, 0.3));
+    color: -internal-light-dark(rgb(84, 84, 84), rgb(170, 170, 170));
+    border-color: rgba(118, 118, 118, 0.3);
+}
+
+#resultado, #entrada_data {
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 20px;
+    border-radius: 2px;
+}
+.wrapper-calendar{
+    display: flex;
+    width: 100%;
+}
+
+div#calendar {
+    width: 100%;
+}
+
+.button_control{
+    height: 30px;
+    width: 30px;
+    align-self: center;
+    z-index: 1;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
 }

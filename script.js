@@ -4,14 +4,12 @@ const Calendar = tui.Calendar
 let eventos = []
 let container = document.getElementById('calendar')
 
-
 function getData(){
-    eventos = []
-    let entrada = this.value
-
+    let entrada = this.value    
     // estudar promises e/ou settimeout para aplicar aqui: criar calendario acontecerá apenas depois que tiver o retorno da calculodata
     resultado.value = calculoData( new Date(entrada))
     criarCalendario(eventos)
+    eventos = []
     
     
 }
@@ -33,26 +31,31 @@ function calculoData(dataEntrada){
         let diaAtualizado = `${dia_dinamico.getDate()}/${dia_dinamico.getMonth()+1}/${dia_dinamico.getFullYear()}`
         
         if (dias_trabalho < 7){
-            dia[diaAtualizado] = 'Trabalha? Sim.'
+            dia[diaAtualizado] = 'Trabalha'
             dias_trabalho++
         } else {
             if(dias_folga < 3){
                 dia[diaAtualizado] = 'Folga 0/'
                 dias_folga++
             } else {
-                dia[diaAtualizado] = 'Trabalha? Sim.'
+                dia[diaAtualizado] = 'Trabalha'
                 dias_folga = 1
                 dias_trabalho = 2
             }
         }
         intervalo = intervalo + tempoNumDia
+        let stringEvento = dia[diaAtualizado]
         eventos.push(
             {
                 id: intervalo,
                 calendarId: 'cal1',
                 title: dia[diaAtualizado],
-                start: new Date(dia_dinamico),
-                end: new Date(dia_dinamico)
+                start: `${dia_dinamico.getFullYear()}-${('0'+(dia_dinamico.getMonth()+1)).slice(-2)}-${('0'+(dia_dinamico.getDate())).slice(-2)}T08:00:00`,
+                end: `${dia_dinamico.getFullYear()}-${('0'+(dia_dinamico.getMonth()+1)).slice(-2)}-${('0'+(dia_dinamico.getDate())).slice(-2)}T09:00:00`,
+                category: 'allday',
+                body: '       ',
+                state: 'Busy',
+                isFocused: true,
             }
             )
             dia_dinamico.setDate(dia_dinamico.getDate() + 1)
@@ -83,9 +86,24 @@ let options = {
         },
     ],
 };
+
+let calendar = new Calendar(container, options)
 function criarCalendario(eventos){
-    let calendar = new Calendar(container, options)
+    calendar.clear()
     calendar.createEvents(eventos)
     calendar.render()
+    eventos = []
+    
+    
+    
 }
+
+const move = (offset) => {
+    if (offset === -1) {
+      calendar.prev();
+    } else if (offset === 1) {
+      calendar.next();
+    }
+  }
+
 //-------fim do calendario
